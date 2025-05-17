@@ -1,6 +1,3 @@
-input.onButtonPressed(Button.A, function () {
-    go = true
-})
 pins.onPulsed(DigitalPin.P0, PulseValue.Low, function () {
     if (go) {
         go = false
@@ -11,13 +8,29 @@ let go = false
 let time = 0
 time = 0
 go = false
-images.iconImage(IconNames.SmallSquare).showImage(0, 0)
+images.iconImage(IconNames.No).showImage(0, 0)
 while (pins.digitalReadPin(DigitalPin.P0) == 0) {
 	
 }
 pins.setEvents(DigitalPin.P0, PinEventType.Pulse)
-basic.pause(10)
+// This pause is to let the sensor settle
+// 
+// Use a longer pause if it keeps triggering
+basic.pause(50)
 go = true
+/**
+ * To measure low pulse events
+ * 
+ * Wait for high
+ * 
+ * Wait for a pulse event
+ * 
+ * Display the pulse duration in milliseconds
+ * 
+ * A second pin can be used to monitor the signal state for long pulses
+ * 
+ * Press RESET to time another pulse
+ */
 basic.forever(function () {
     if (go) {
         if (pins.digitalReadPin(DigitalPin.P1) == 1) {
@@ -27,7 +40,7 @@ basic.forever(function () {
         }
     } else {
         basic.clearScreen()
-        basic.showNumber(time)
+        basic.showNumber(time / 1000)
         basic.pause(200)
     }
 })
