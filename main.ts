@@ -1,9 +1,19 @@
 pins.onPulsed(DigitalPin.P0, PulseValue.Low, function () {
-    time = pins.pulseDuration()
+    if (go) {
+        time = pins.pulseDuration()
+    }
 })
+let go = false
 let time = 0
 time = 0
+go = false
+images.iconImage(IconNames.No).showImage(0, 0)
+while (pins.digitalReadPin(DigitalPin.P0) == 0) {
+	
+}
 pins.setEvents(DigitalPin.P0, PinEventType.Pulse)
+basic.pause(10)
+go = true
 basic.forever(function () {
     if (time != 0) {
         basic.clearScreen()
