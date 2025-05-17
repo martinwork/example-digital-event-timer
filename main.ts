@@ -4,6 +4,19 @@ pins.onPulsed(DigitalPin.P0, PulseValue.Low, function () {
         time = pins.pulseDuration()
     }
 })
+/**
+ * To measure low pulse events
+ * 
+ * Wait for high
+ * 
+ * Wait for a pulse event
+ * 
+ * Display the pulse duration in milliseconds
+ * 
+ * A second pin can be used to monitor the signal state for long pulses
+ * 
+ * Press RESET to time another pulse
+ */
 let go = false
 let time = 0
 time = 0
@@ -18,19 +31,6 @@ pins.setEvents(DigitalPin.P0, PinEventType.Pulse)
 // Use a longer pause if it keeps triggering
 basic.pause(50)
 go = true
-/**
- * To measure low pulse events
- * 
- * Wait for high
- * 
- * Wait for a pulse event
- * 
- * Display the pulse duration in milliseconds
- * 
- * A second pin can be used to monitor the signal state for long pulses
- * 
- * Press RESET to time another pulse
- */
 basic.forever(function () {
     if (go) {
         if (pins.digitalReadPin(DigitalPin.P1) == 1) {
